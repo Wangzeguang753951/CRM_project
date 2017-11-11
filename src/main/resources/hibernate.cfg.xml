@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+
+
+
+    <!--<property name="connection.url">jdbc:mysql://localhost:3306/crm</property>-->
+    <!--<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>-->
+    <!--<property name="connection.username">root</property>-->
+    <!--<property name="connection.password">123456</property>-->
+
+
+
+    <!--为了使用commit后自动关闭-->
+    <!--<property name="hibernate.current_session_context_class">thread</property>-->
+    <!--显示数据库语句-->
+    <property name="show_sql">true</property>
+    <property name="format_sql">true</property>
+
+    <!--配置方言-->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+
+
+    <!--对表进行更改-->
+    <property name="hibernate.hbm2ddl.auto">update</property>
+
+
+    <!--加载三个表的映射-->
+    <mapping resource="com/wzg/ssh/staff/domain/Dept.hbm.xml"/>
+    <mapping resource="com/wzg/ssh/staff/domain/Post.hbm.xml"/>
+    <mapping resource="com/wzg/ssh/staff/domain/Staff.hbm.xml"/>
+
+
+  </session-factory>
+</hibernate-configuration>

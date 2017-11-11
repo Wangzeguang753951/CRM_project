@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.wzg.ssh.staff.domain">
+
+
+    <!--创建部门信息表-->
+    <class name="Department" table="crm_dept">
+        <id name="id" column="dept_Id">
+            <generator class="native"/>
+        </id>
+        <property name="deptName"/>
+
+        <!--设置部门一对多-->
+        <set name="posts" table="crm_post" cascade="save-update" inverse="true">
+            <key column="dept_Id"/>
+            <one-to-many class="Post"/>
+        </set>
+        <!--设置一对多员工-->
+
+        <set name="staffs" table="crm_staff" cascade="save-update" inverse="true">
+            <key column="dept_Id"/>
+            <one-to-many class="Staff"/>
+        </set>
+
+    </class>
+</hibernate-mapping>
