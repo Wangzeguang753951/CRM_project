@@ -29,8 +29,8 @@
 
 
     <!--加载三个表的映射-->
-    <mapping resource="com/wzg/ssh/staff/domain/Dept.hbm.xml"/>
-    <mapping resource="com/wzg/ssh/staff/domain/Post.hbm.xml"/>
+    <mapping resource="com/wzg/ssh/department/domain/Dept.hbm.xml"/>
+    <mapping resource="com/wzg/ssh/post/domain/Post.hbm.xml"/>
     <mapping resource="com/wzg/ssh/staff/domain/Staff.hbm.xml"/>
 
 

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/cache
+                           http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <context:component-scan base-package="com.wzg.ssh"/>
+
+    <!--引用数据库-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!--配置数据库的四大属性-->
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/crm"/>
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="user" value="root"/>
+        <property name="password" value="123456"/>
+    </bean>
+
+
+    <!--配置session事务-->
+    <!--初始化SessionFactory-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+    </bean>
+
+
+    <!--创建StaffDao对象-->
+    <bean id="staffDao" class="com.wzg.ssh.staff.dao.impl.StaffDaoImpl">
+        <!--为继承来的SessionFactory属性赋值-->
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+    <!--创建userService对象-->
+    <bean id="staffService" class="com.wzg.ssh.staff.service.impl.StaffServiceImpl">
+        <property name="staffDao" ref="staffDao"/>
+    </bean>
+
+
+    <bean id="staffAction" class="com.wzg.ssh.staff.web.action.StaffAction" scope="prototype">
+        <property name="service" ref="staffService"/>
+        <property name="deptService" ref="deptService"/>
+    </bean>
+
+    
+
+
+
+
+
+
+
+
+
+    <!--事务管理器-->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <!--配置顾问 (配置通知)-->
+    <!--
+    advice是什么?
+    Spring已经为我们提供了一个事务管理器,它里面封装了事务的常用方法:
+    比如 开启事务 提交事务 事务回滚
+    并且已经定义好了在接入点调用的某个时机
+    调用事务的某个方法(也就是说在前置通知定义开启事务,正常后置通知定义提交事务,异常后置通知定义回滚事务)
+    我们需要做的就是告知Spring在哪些目标方法上添加切面通知
+    advisor中定义了上述的规则,将advisor配置给切点后,Spring会自动织入切面
+    -->
+    <tx:advice id="userAdvicer" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+
+
+
+    <!--配置切面-->
+    <aop:config>
+        <!--声明切点所有的方法都加事务-->
+        <aop:pointcut id="userPointCut" expression="execution(* com.wzg.ssh.*.dao.impl.*.*(..))"/>
+        <!--给所有的连接点 配置顾问(tongzhi)-->
+        <aop:advisor advice-ref="userAdvicer" pointcut-ref="userPointCut"/>
+    </aop:config>
+
+
+</beans>

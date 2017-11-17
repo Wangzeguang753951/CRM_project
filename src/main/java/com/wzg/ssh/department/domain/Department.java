@@ -1,4 +1,7 @@
-package com.wzg.ssh.staff.domain;
+package com.wzg.ssh.department.domain;
+
+import com.wzg.ssh.post.domain.Post;
+import com.wzg.ssh.staff.domain.Staff;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -7,7 +10,7 @@ import java.util.Set;
  * Created by dllo on 17/11/9.
  */
 public class Department {
-    private int id;
+    private int deptId;
     private String deptName;
 
     // 部门一对多 有多个职位 多个员工
@@ -20,29 +23,33 @@ public class Department {
     public Department() {
     }
 
+    public Department(int deptId) {
+        this.deptId = deptId;
+    }
+
     public Department(String deptName) {
         this.deptName = deptName;
     }
 
-    public Department(int id, String deptName) {
-        this.id = id;
+    public Department(int deptId, String deptName) {
+        this.deptId = deptId;
         this.deptName = deptName;
     }
 
     @Override
     public String toString() {
         return "Department{" +
-                "id=" + id +
+                "deptId=" + deptId +
                 ", deptName='" + deptName + '\'' +
                 '}';
     }
 
-    public int getId() {
-        return id;
+    public int getDeptId() {
+        return deptId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDeptId(int deptId) {
+        this.deptId = deptId;
     }
 
     public String getDeptName() {

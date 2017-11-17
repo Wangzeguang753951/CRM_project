@@ -20,6 +20,7 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
     // 查查出数据库中的员工信息集合
     @Override
     public Staff login(Staff staff) {
+        // 登录时把md5加上 才能登录
         String md5 = MD5Util.getMd5(staff.getLoginPwd());
         staff.setLoginPwd(md5);
         List<Staff> staffs = getHibernateTemplate().findByExample(staff);
@@ -58,40 +59,48 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
         return (List<Department>) getHibernateTemplate().find(sql);
     }
 
+
+    // 七个查询方法
     @Override
-    public List<Staff> getAllResult(int deptId, int postId, String staffName) {
+    public List<Staff> findAllStaffs(int deptId, int postId, String staffName) {
+        String sql1 = "from Staff crm_staff";
+        return (List<Staff>) getHibernateTemplate().find(sql1);
+    }
 
-        if (deptId > 0 && postId == 0 && staffName.equals("")) {
+    @Override
+    public List<Staff> findStaffsByDeptId(int deptId, int postId, String staffName) {
+        String sql2 = "from Staff crm_staff where dept.deptId=?";
+        return (List<Staff>) getHibernateTemplate().find(sql2, deptId);
+    }
 
-            String sql1 = "from Staff crm_staff where dept.deptId=?";
-            return (List<Staff>) getHibernateTemplate().find(sql1, deptId);
+    @Override
+    public List<Staff> findStaffsByDeptIdAndPostId(int deptId, int postId, String staffName) {
+        String sql3 = "from Staff crm_staff where dept.deptId=? and post.postId = ?";
+        return (List<Staff>) getHibernateTemplate().find(sql3, deptId, postId);
+    }
 
-        } else if (deptId == 0 && postId == 0 && !staffName.equals("")) {
-            String sql4 = "from Staff crm_staff where staffName like ?";
-            return (List<Staff>) getHibernateTemplate().find(sql4, "%" + staffName + "%");
+    @Override
+    public List<Staff> findStaffsByDeptIdAndPostIdAndStaffName(int deptId, int postId, String staffName) {
+        String sql4 = "from Staff crm_staff where dept.deptId=? and post.postId=? and staffName like ?";
+        return (List<Staff>) getHibernateTemplate().find(sql4, deptId, postId, "%" + staffName + "%");
+    }
 
+    @Override
+    public List<Staff> findStaffsByDeptIdAndStaffName(int deptId, int postId, String staffName) {
+        String sql5 = "from Staff crm_staff where dept.deptId=? and staffName like ?";
+       return (List<Staff>) getHibernateTemplate().find(sql5, deptId, "%" + staffName + "%");
+    }
 
-        } else if (deptId > 0 && postId > 0 && !staffName.equals("")) {
-
-            String sql3 = "from Staff crm_staff where dept.deptId=? and post.postId=? and staffName like ?";
-            return (List<Staff>) getHibernateTemplate().find(sql3, deptId, postId, "%" + staffName + "%");
-
-        } else if (deptId > 0 && postId > 0 && staffName.equals("")) {
-            String sql2 = "from Staff crm_staff where dept.deptId=? and post.postId = ?";
-            return (List<Staff>) getHibernateTemplate().find(sql2, deptId, postId);
-
-        } else if (deptId > 0 && postId == 0 && !staffName.equals("")) {
-
-            String sql6 = "from Staff crm_staff where dept.deptId=? and staffName like ?";
-            getHibernateTemplate().find(sql6, deptId, "%" + staffName + "%");
-        } else {
-
-            String sql5 = "from Staff crm_staff";
-            return (List<Staff>) getHibernateTemplate().find(sql5);
-        }
-        return null;
-
+    @Override
+    public List<Staff> findStaffsByStaffName(int deptId, int postId, String staffName) {
+        String sql6 = "from Staff crm_staff where staffName like ?";
+        return (List<Staff>) getHibernateTemplate().find(sql6, "%" + staffName + "%");
     }
 
 
+
+
 }
+
+
+

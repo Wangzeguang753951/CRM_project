@@ -1,8 +1,8 @@
 package com.wzg.ssh.staff.service.impl;
 
+import com.wzg.ssh.department.domain.Department;
+import com.wzg.ssh.post.domain.Post;
 import com.wzg.ssh.staff.dao.StaffDao;
-import com.wzg.ssh.staff.domain.Department;
-import com.wzg.ssh.staff.domain.Post;
 import com.wzg.ssh.staff.domain.Staff;
 import com.wzg.ssh.staff.service.StaffService;
 
@@ -22,44 +22,62 @@ public class StaffServiceImpl implements StaffService {
         return staffDao.login(staff);
     }
 
-    // 插入部门
+    // 查出所有员工
     @Override
-    public Department saveDept(Department dept) {
-        return staffDao.saveDept(dept);
+    public List<Staff> getStaff(Staff staff) {
+        return staffDao.getStaff(staff);
     }
 
-    // 插入员工信息
+    // 保存所有的员工
     @Override
-    public Staff saveStaff(Staff staff) {
-        return staffDao.saveStaff(staff);
+    public void saveOrUpdate(Staff staff) {
+        staffDao.saveOrUpdate(staff);
     }
 
+
+    // 查出所有部门为二级联动所用
     @Override
-    public List<Department> getDepartment() {
-        return null;
+    public List<Department> getDept() {
+        return staffDao.getDept();
     }
 
-    @Override
-    public List<Post> getPostByDeptId(int deptId) {
-        return null;
-    }
 
     @Override
-    public List<Staff> getStaffByDeptIdAndPostId(int deptId, int postId) {
-        return null;
+    public List<Staff> getAllResult(int deptId, int postId, String staffName) {
+
+        //1全空
+        if (deptId < 0 && postId < 0 && staffName.equals("")) {
+            return staffDao.findAllStaffs(deptId, postId, staffName);
+        }
+
+        //2部门不空
+        if (deptId > 0 && postId < 0 && staffName.equals("")) {
+            return staffDao.findStaffsByDeptId(deptId, postId, staffName);
+        }
+
+        //3前两个不为空 后一个空
+        if (deptId > 0 && postId > 0 && staffName.equals("")) {
+            return staffDao.findStaffsByDeptIdAndPostId(deptId, postId, staffName);
+        }
+
+        //4 部门ID不为空 职位不为空 名字不为空
+        if (deptId > 0 && postId > 0 && !staffName.equals("")) {
+            return staffDao.findStaffsByDeptIdAndPostIdAndStaffName(deptId, postId, staffName);
+        }
+
+        //5 部门不为空 职位为空 名字不为空
+
+        if (deptId > 0 && postId < 0 && !staffName.equals("")) {
+            return staffDao.findStaffsByDeptIdAndStaffName(deptId, postId, staffName);
+        }
+
+        //6 部门为空 职位为空 名字不为空
+
+            return staffDao.findStaffsByStaffName(deptId, postId, staffName);
+
+
     }
 
-    @Override
-    public List<Staff> getStaffByDeptId(int deptId) {
-        return null;
-    }
-
-    @Override
-    public List<Staff> getStaffs() {
-        return null;
-    }
-
-    // 使用userDao 对象
     public void setStaffDao(StaffDao staffDao) {
         this.staffDao = staffDao;
     }

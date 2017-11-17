@@ -25,7 +25,7 @@
    
     <td width="57%"align="right">
     	<%--添加职务 --%>
-       <a href="/getDept1">
+       <a href="/getDeptList.action">
        	<img src="${pageContext.request.contextPath}/images/button/tianjia.gif" />
        </a>
       
@@ -52,7 +52,7 @@
 	    <td align="center">${p.dept.deptName} </td>
 	    <td align="center">${p.postName} </td>
 	  	<td width="7%" align="center">
-	  		<a href="${pageContext.request.contextPath}/pages/post/addOrEditPost.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
+	  		<a href="getDeptList?dept.deptId=${p.dept.deptId}&postId=${p.postId}&postName=${p.postName}"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
 	  	</td>
 	  </tr>
   </s:iterator>

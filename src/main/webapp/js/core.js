@@ -7,13 +7,13 @@
  * 	2.js文件中不能使用el函数
  */
 var tempPostId = null;
-function changePost(departmentObj,postId){
+function changePost(value){
 	//1 选择的部门id
-	var depId = departmentObj.value;
-	tempPostId = postId;
+	var data = new FormData();
+	data.append("deptId", value);
 	
 	//2 发送ajax 通过部门id 查询对应职务
-	var url = "${pageContext.request.contextPath}/post/postAction_ajaxGetPostion?crmDepartment.depId=" + depId;
+	var url = "http://localhost:8080/getPostByDeptId";
 	
 	//2.1 创建核心对象
 	var xmlhttp=null;
@@ -27,8 +27,9 @@ function changePost(departmentObj,postId){
 	xmlhttp.onreadystatechange = function(){
 		// * 发送成功， 并发送的正常页面
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			
-			var postSelectObject = document.getElementById(tempPostId);
+
+
+			var postSelectObject = document.getElementById("postId");
 			postSelectObject.innerHTML = "<option>----请--选--择----</option>";
 			
 			//获得数据 json，并处理
@@ -50,7 +51,7 @@ function changePost(departmentObj,postId){
 	};
 	
 	// 2.3 打开连接 ,以get请求方式发送数据
-	xmlhttp.open("get",url);
+	xmlhttp.open("POST",url);
 	
 	// 2.4 发送 , 没有请求体的内容，设置成null
 	xmlhttp.send(null);

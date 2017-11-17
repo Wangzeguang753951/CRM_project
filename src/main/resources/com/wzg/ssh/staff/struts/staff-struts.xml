@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <constant name="struts.devMode" value="true"/>
+
+    <package name="com.wzg.ssh.staff.web.action" extends="json-default">
+        <action name="login" class="staffAction" method="login">
+            <result name="success">/pages/frame.jsp</result>
+            <result name="input">/pages/login.jsp</result>
+        </action>
+
+    </package>
+
+
+    <package name="com.wzg.ssh.staff.struts" extends="json-default">
+        <!--员工管理点击后显示二级联动-->
+        <action name="getStaff" class="staffAction" method="getStaff">
+            <result name="success">/pages/staff/listStaff.jsp</result>
+        </action>
+
+        <!--在员工界面查出所有部门放入下拉列表中-->
+        <action name="getAllDept" class="deptAction" method="getDept">
+            <result name="success">/pages/staff/addStaff.jsp</result>
+        </action>
+
+        <!--通过部门ID查出所有职位 添加员工时候用的 二级联动-->
+        <action name="getPostByDeptId" class="deptAction" method="getPostByDeptId">
+            <result name="success" type="json">
+                <param name="root">postList</param>
+                <param name="includeProperties">\[\d\]\.postId,\[\d\]\.postName</param>
+            </result>
+        </action>
+        <!--保存员工信息的用saveOrUpdate方法-->
+
+        <action name="saveOrUpdateStaff" class="staffAction" method="saveOrUpdateStaff">
+            <result name="success" type="redirectAction">getStaff</result>
+        </action>
+
+
+        <!--编辑时候-->
+        <action name="editStaff" class="staffAction" method="getDept">
+            <result name="success" >/pages/staff/editStaff.jsp</result>
+        </action>
+
+        <!--查询所有的员工-->
+        <action name="findAllStaff" class="staffAction" method="getStaff">
+            <result name="success">/pages/staff/listStaff.jsp</result>
+        </action>
+
+
+
+        <!--高级查询-->
+        <action name="getAllResult" class="staffAction" method="getAllResult">
+            <result name="success" type="json">
+                <param name="root">staffs</param>
+                <param name="excludeProperties">\[\d\]\.dept\.posts,
+                \[\d\]\.dept\.staffs,
+                \[\d\]\.post\.staffs
+                ,\[\d\]\.post\.dept</param>
+            </result>
+        </action>
+
+
+        <!--&lt;!&ndash;根据部门ID查询所有员工&ndash;&gt;-->
+        <!--<action name="getStaffByDeptId" class="deptAction" method="getStaffByDeptId">-->
+            <!--<result name="success">/pages/staff/listStaff.jsp</result>-->
+        <!--</action>-->
+
+
+
+
+
+    </package>
+
+
+</struts>

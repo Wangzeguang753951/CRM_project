@@ -4,17 +4,19 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.wzg.ssh.staff.domain">
     <!--创建员工信息表-->
-    <class name="Post" table="crm_post">
-        <id name="id" column="post_Id">
+    <class name="com.wzg.ssh.post.domain.Post" table="crm_post">
+        <id name="postId" column="post_Id">
             <generator class="native"/>
         </id>
         <property name="postName"/>
 
         <!--设置多对一部门-->
-        <many-to-one name="dept" class="Department" column="dept_Id" cascade="save-update"/>
+        <many-to-one name="dept" class="com.wzg.ssh.department.domain.Department" column="dept_Id"  lazy="false"/>
+
+
 
         <!--设置一对多员工-->
-        <set name="staffs" table="crm_staff" inverse="true">
+        <set name="staffs" table="crm_staff" lazy="false">
             <key column="post_Id"/>
             <one-to-many class="Staff"/>
         </set>

@@ -40,6 +40,7 @@ FONT-SIZE: 12px; COLOR: #4b4b4b; LINE-HEIGHT: 18px; TEXT-DECORATION: none
 		<tr align="center" >
 		 
 			<td class="login_msg" width="400">
+				<%--登录的请求--%>
 				<form action="/login.action" method="post">
 					
 					<font size="6" color="#ffffff">

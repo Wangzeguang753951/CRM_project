@@ -1,4 +1,7 @@
-package com.wzg.ssh.staff.domain;
+package com.wzg.ssh.post.domain;
+
+import com.wzg.ssh.department.domain.Department;
+import com.wzg.ssh.staff.domain.Staff;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -7,7 +10,7 @@ import java.util.Set;
  * Created by dllo on 17/11/9.
  */
 public class Post {
-    private int id;
+    private int postId;
     private String postName;
 
     // 职位对应得部门多对一
@@ -21,29 +24,38 @@ public class Post {
     public Post() {
     }
 
+    public Post(int postId) {
+        this.postId = postId;
+    }
+
     public Post(String postName) {
         this.postName = postName;
     }
 
-    public Post(int id, String postName) {
-        this.id = id;
+    public Post(int postId, String postName) {
+        this.postId = postId;
         this.postName = postName;
+    }
+
+    public Post(int postId, Department dept) {
+        this.postId = postId;
+        this.dept = dept;
     }
 
     @Override
     public String toString() {
         return "Post{" +
-                "id=" + id +
+                "postId=" + postId +
                 ", postName='" + postName + '\'' +
                 '}';
     }
 
-    public int getId() {
-        return id;
+    public int getPostId() {
+        return postId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
     public String getPostName() {

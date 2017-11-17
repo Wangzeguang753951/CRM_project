@@ -11,12 +11,17 @@
     <!--当然,这个配置可以不写 因为在Struts2-Spring-plugin里面已经有了-->
     <constant name="struts.objectFactory" value="spring"/>
 
+    <include file="com/wzg/ssh/department/struts/dept-struts.xml"/>
+    <include file="com/wzg/ssh/staff/struts/staff-struts.xml"/>
+    <include file="com/wzg/ssh/post/struts/post-struts.xml"/>
+
     <!--配置拦截器-->
     <package name="base" extends="json-default">
 
         <interceptors>
             <interceptor name="loginInterceptor" class="com.wzg.ssh.staff.web.interceptor.LoginInterceptor">
-                <param name="excludeMethods">login</param>
+                <param name="excludeMethods">login,getStaff</param>
+
             </interceptor>
             <interceptor-stack name="crmInterceptorStack">
                 <interceptor-ref name="loginInterceptor"/>
@@ -26,26 +31,6 @@
         <default-interceptor-ref name="crmInterceptorStack"/>
 
     </package>
-
-
-
-   <package name="com.wzg.ssh.staff.web.action." extends="base">
-    <!--插入员工信息的Action-->
-       <action name="saveStaff" class="staffAction" method="saveStaff">
-           <result name="success">/pages/staff/listStaff.jsp</result>
-       </action>
-
-       <action name="login" class="staffAction" method="login">
-           <result name="success">/pages/frame.jsp</result>
-           <result name="input">/pages/login.jsp</result>
-
-       </action>
-       <action name="saveDept" class="com.wzg.ssh.staff.web.action.DeptAction" method="saveDept">
-           <result name="success">/pages/department/listDepartment.jsp</result>
-       </action>
-
-
-   </package>
 
 
 

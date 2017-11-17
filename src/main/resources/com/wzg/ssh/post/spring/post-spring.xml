@@ -30,21 +30,26 @@
     </bean>
 
 
-    <!--创建UserDao对象-->
-    <bean id="staffDao" class="com.wzg.ssh.staff.dao.impl.StaffDaoImpl">
+    <!--创建StaffDao对象-->
+    <bean id="postDao" class="com.wzg.ssh.post.dao.impl.PostDaoImpl">
         <!--为继承来的SessionFactory属性赋值-->
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
 
     <!--创建userService对象-->
-    <bean id="staffService" class="com.wzg.ssh.staff.service.impl.StaffServiceImpl">
-        <property name="staffDao" ref="staffDao"/>
+    <bean id="postService" class="com.wzg.ssh.post.service.PostServiceImpl">
+        <property name="postDao" ref="postDao"/>
+    </bean>
+    
+
+    <bean id="postAction" class="com.wzg.ssh.post.web.action.PostAction" scope="prototype">
+        <property name="service" ref="postService"/>
     </bean>
 
-    <bean id="staffAction" class="com.wzg.ssh.staff.web.action.StaffAction" scope="prototype">
-        <property name="service" ref="staffService"/>
-    </bean>
+    
+
+
 
 
 

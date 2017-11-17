@@ -1,10 +1,13 @@
 package com.wzg.ssh.staff.domain;
 
+import com.wzg.ssh.department.domain.Department;
+import com.wzg.ssh.post.domain.Post;
+
 /**
  * Created by dllo on 17/11/9.
  */
 public class Staff {
-    private int id;
+    private int staffId;
     private String loginName;
     private String loginPwd;
     private String staffName;
@@ -20,7 +23,10 @@ public class Staff {
     private Department dept;
 
 
-
+    public Staff(String staffName, Post post) {
+        this.staffName = staffName;
+        this.post = post;
+    }
 
     public Staff() {
     }
@@ -34,36 +40,33 @@ public class Staff {
 
     }
 
-    public Staff(int id, String loginName, String loginPwd, String staffName, String gender, String onDutyDate) {
-        this.id = id;
+    public Staff(int staffId, String loginName, String loginPwd, String staffName, String gender, String onDutyDate) {
+        this.staffId = staffId;
         this.loginName = loginName;
         this.loginPwd = loginPwd;
         this.staffName = staffName;
         this.gender = gender;
         this.onDutyDate = onDutyDate;
-
     }
 
     @Override
     public String toString() {
         return "Staff{" +
-                "id=" + id +
+                "staffId=" + staffId +
                 ", loginName='" + loginName + '\'' +
                 ", loginPwd='" + loginPwd + '\'' +
                 ", staffName='" + staffName + '\'' +
                 ", gender='" + gender + '\'' +
                 ", onDutyDate='" + onDutyDate + '\'' +
-                ", post=" + post +
-                ", dept=" + dept +
                 '}';
     }
 
-    public int getId() {
-        return id;
+    public int getStaffId() {
+        return staffId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setStaffId(int staffId) {
+        this.staffId = staffId;
     }
 
     public String getLoginName() {
@@ -122,5 +125,9 @@ public class Staff {
 
     public void setDept(Department dept) {
         this.dept = dept;
+    }
+
+    public Staff(String staffName) {
+        this.staffName = staffName;
     }
 }

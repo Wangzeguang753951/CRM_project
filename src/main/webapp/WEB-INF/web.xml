@@ -9,7 +9,7 @@
   <!--配置Spring映射文件 加载 放在前面-->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:com/wzg/ssh/staff/spring/*.xml</param-value>
+    <param-value>classpath:com/wzg/ssh/*/spring/*.xml</param-value>
   </context-param>
 
 

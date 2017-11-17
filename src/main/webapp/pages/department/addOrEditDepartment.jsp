@@ -35,11 +35,12 @@
 </table>
 
 <%--保存部门--%>
-<form action="/saveDept" method="post">
+<form action="saveDept" method="post">
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
 	    <td>部门名称：</td>
-	    <td><input type="text" name="deptName" value=""/></td>
+	    <td><input type="text" name="deptName" value="${deptName}"/></td>
+	    <td><input type="hidden" name="deptId" value="${deptId}"/></td>
 	  </tr>
 	</table>
 </form>

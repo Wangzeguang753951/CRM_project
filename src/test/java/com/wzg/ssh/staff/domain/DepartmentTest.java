@@ -1,5 +1,7 @@
 package com.wzg.ssh.staff.domain;
 
+import com.wzg.ssh.department.domain.Department;
+import com.wzg.ssh.post.domain.Post;
 import com.wzg.ssh.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.junit.Test;

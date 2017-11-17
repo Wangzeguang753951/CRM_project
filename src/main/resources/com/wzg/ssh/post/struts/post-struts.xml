@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <package name="getPost" extends="json-default">
+
+        <action name="getPost" class="postAction" method="getPost">
+            <result name="success">/pages/post/listPost.jsp</result>
+        </action>
+
+        <action name="getDeptList" class="postAction" method="getDept">
+            <result name="success">/pages/post/addOrEditPost.jsp</result>
+        </action>
+
+        <action name="savePost" class="postAction" method="savePost">
+            <result name="success" type="redirectAction">
+                <param name="actionName">getPost</param>
+            </result>
+        </action>
+
+
+    </package>
+</struts>

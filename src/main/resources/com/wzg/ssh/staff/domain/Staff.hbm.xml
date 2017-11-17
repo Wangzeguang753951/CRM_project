@@ -5,7 +5,7 @@
 <hibernate-mapping package="com.wzg.ssh.staff.domain">
     <!--创建员工信息表-->
     <class name="Staff" table="crm_staff">
-        <id name="id" column="staff_Id">
+        <id name="staffId" column="staff_Id">
             <generator class="native"/>
         </id>
         <property name="loginName"/>
@@ -15,8 +15,8 @@
         <property name="onDutyDate"/>
 
 
-        <many-to-one name="dept" class="Department" column="dept_Id" cascade="save-update" lazy="false"/>
+        <many-to-one name="dept" class="com.wzg.ssh.department.domain.Department" column="dept_Id"/>
 
-        <many-to-one name="post" class="Post" column="post_Id" cascade="save-update" lazy="false"/>
+        <many-to-one name="post" class="com.wzg.ssh.post.domain.Post" column="post_Id" lazy="false"/>
     </class>
 </hibernate-mapping>
