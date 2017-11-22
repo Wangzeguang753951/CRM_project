@@ -21,6 +21,7 @@ public interface StaffDao {
     Staff login(Staff staff);
 
 
+
     /**
      * 查询所有的员工
      *
@@ -43,6 +44,22 @@ public interface StaffDao {
      * @return
      */
     List<Department> getDept();
+
+
+    /**
+     * 根据员工ID查出所有的员工
+     * @param staff
+     * @return
+     */
+    List<Staff> getStaffsByStaffId(Staff staff);
+
+    /**
+     * 修改密码
+     * @param staff
+     */
+    void updatePwd(Staff staff);
+
+
 
 
     //1全空

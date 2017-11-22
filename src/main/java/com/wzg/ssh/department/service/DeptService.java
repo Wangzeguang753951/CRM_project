@@ -24,12 +24,6 @@ public interface DeptService {
      */
     List<Department> getDept();
 
-    /**
-     * 根据部门ID查出部门名字
-     * @param deptId
-     * @return
-     */
-    List<Department> getDeptByDeptId(int deptId);
 
 
     /**
@@ -38,6 +32,10 @@ public interface DeptService {
      * @return
      */
     List<Post> getPostByDeptId(Department dept);
+
+
+
+//    List<Department> getListByPage(int offset,int length);
 
 
 

@@ -17,41 +17,59 @@ import java.util.List;
  * Created by dllo on 17/11/10.
  */
 public class DeptAction extends BaseAction<Department, DeptService> {
+//    private String totalPage;
+//    private String pageSize;
+//    private String offSet;
+//    private int totalSize;
+
+
 
     //查出的所有部门的集合
     private List<Department> departments;
 
-
+    // 所有职位集合
     private List<Post> postList;
 
+    // 所有员工的集合
     private List<Staff> listStaff;
 
 
-    // 保存部门
-    public String saveOrUpdateDept() {
-        System.out.println(getModel().getDeptName());
-    ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
-        ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
-        service.saveOrUpdateDept(getModel());
-
+    //  查出所有部门 结果为departments集合
+    @SkipValidation
+    public String getDept() {
+        departments = service.getDept();
         return SUCCESS;
     }
 
 
-    // 查出所有部门 结果为departments集合
-    public String getDept() {
-            departments = service.getDept();
+    // 保存或者编辑部门
+    public String saveOrUpdateDept() {
+
+        // 给出验证判断
+        if (!getModel().getDeptName().equals("")) {
+            service.saveOrUpdateDept(getModel());
             return SUCCESS;
+        }
+        // 走验证器
+        return INPUT;
 
 
     }
 
 
+    @SkipValidation
     //    根据部门ID查询所有职位
     public String getPostByDeptId() {
         postList = service.getPostByDeptId(getModel());
         return SUCCESS;
     }
+//    @SkipValidation
+//    public String listByPage(){
+//        List<Department> dept = service.getDept();
+//        totalSize = dept.size();
+//
+//        return SUCCESS;
+//    }
 
 
     public List<Department> getDepartments() {
@@ -77,4 +95,36 @@ public class DeptAction extends BaseAction<Department, DeptService> {
     public void setStaffs(List<Staff> staffs) {
         this.listStaff = staffs;
     }
+
+//    public String getTotalPage() {
+//        return totalPage;
+//    }
+//
+//    public void setTotalPage(String totalPage) {
+//        this.totalPage = totalPage;
+//    }
+//
+//    public String getPageSize() {
+//        return pageSize;
+//    }
+//
+//    public void setPageSize(String pageSize) {
+//        this.pageSize = pageSize;
+//    }
+//
+//    public String getOffSet() {
+//        return offSet;
+//    }
+//
+//    public void setOffSet(String offSet) {
+//        this.offSet = offSet;
+//    }
+
+//    public String getTotalSize() {
+//        return totalSize;
+//    }
+//
+//    public void setTotalSize(String totalSize) {
+//        this.totalSize = totalSize;
+//    }
 }

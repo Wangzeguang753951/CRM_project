@@ -46,12 +46,13 @@
         <td width="6%" align="center">部门名称</td>
         <td width="7%" align="center">编辑</td>
     </tr>
+
+
     <s:iterator value="departments" var="depts">
-
-
         <tr class="tabtd1">
             <td align="center" style="">${depts.deptName} </td>
             <td width="7%" align="center">
+                <%--点击编辑部门设置回显--%>
                 <a href="/editDept.action?deptId=${depts.deptId}&deptName=${depts.deptName}">
                     <img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
             </td>
@@ -62,18 +63,24 @@
 </table>
 
 
-<table border="0" cellspacing="0" cellpadding="0" align="center">
-    <tr>
-        <td align="right">
-            <span>第1/3页</span>
-            <span>
-        	<a href="#">[首页]</a>&nbsp;&nbsp;
-            <a href="#">[上一页]</a>&nbsp;&nbsp;
-            <a href="#">[下一页]</a>&nbsp;&nbsp;
-            <a href="#">[尾页]</a>
-        </span>
-        </td>
-    </tr>
-</table>
+<%--<table border="0" cellspacing="0" cellpadding="0" align="center">--%>
+
+    <%--&lt;%&ndash;&lt;%&ndash;%>--%>
+        <%--&lt;%&ndash;Integer offset = session.setAttribute("offSet");&ndash;%&gt;--%>
+        <%--&lt;%&ndash;Integer pageSize = session.setAttribute("pageSize");&ndash;%&gt;--%>
+        <%--&lt;%&ndash;Integer overPlus = session.setAttribute("overPlus");&ndash;%&gt;--%>
+    <%--&lt;%&ndash;%>&ndash;%&gt;--%>
+    <%--<tr>--%>
+        <%--<td align="right">--%>
+            <%--&lt;%&ndash;<span><%=offset/5+1%>/<%=pageSize%>页</span>&ndash;%&gt;--%>
+            <%--<span>--%>
+        	<%--&lt;%&ndash;<a href="listByPage.action?offset=0">[首页]</a>&nbsp;&nbsp;&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<a href="listByPage.action?offset=<%=offset-5%>">[上一页]</a>&nbsp;&nbsp;&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<a href="listByPage.action?offset=<%=offset+5%>">[下一页]</a>&nbsp;&nbsp;&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<a href="listByPage.action?offset=<%=overPlus%>">[尾页]</a>&ndash;%&gt;--%>
+        <%--</span>--%>
+        <%--</td>--%>
+    <%--</tr>--%>
+<%--</table>--%>
 </body>
 </html>

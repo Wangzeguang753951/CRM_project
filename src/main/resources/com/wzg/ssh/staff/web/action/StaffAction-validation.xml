@@ -3,10 +3,10 @@
 <!DOCTYPE validators PUBLIC
         "-//Apache Struts//XWork Validator 1.0.3//EN"
         "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
-        <validators>
+<validators>
     <field name="model.loginName">
         <field-validator type="requiredstring">
-            <message>用户不能为空</message>
+            <message>登录名不能空</message>
         </field-validator>
     </field>
     <field name="model.loginPwd">
@@ -14,4 +14,24 @@
             <message>密码不能为空</message>
         </field-validator>
     </field>
+
+
+    <!--<field name="oldPassword">-->
+        <!--<field-validator type="requiredstring">-->
+            <!--<message>请填写原始密码</message>-->
+        <!--</field-validator>-->
+    <!--</field>-->
+    <!--<field name="NewPassword">-->
+        <!--<field-validator type="requiredstring">-->
+            <!--<message>请填写新密码</message>-->
+        <!--</field-validator>-->
+    <!--</field>-->
+    <!--<field name="reNewPassword">-->
+        <!--<field-validator type="requiredstring">-->
+            <!--<message>请填写重复密码</message>-->
+        <!--</field-validator>-->
+    <!--</field>-->
+
 </validators>
+
+

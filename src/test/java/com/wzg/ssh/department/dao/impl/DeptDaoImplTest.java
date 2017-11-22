@@ -37,6 +37,18 @@ public class DeptDaoImplTest {
         }
 
     }
+    // 测试编辑或者保存部门
+    @Test
+    public void test1(){
+        Department d = new Department("人事部");
+        deptDao.saveOrUpdateDept(d);
+    }
+    // 测试查询所有部门
+    @Test
+    public void test2(){
+        List<Department> depts = deptDao.getDept();
+        depts.forEach(System.out::println);
+    }
 
 
 

@@ -4,6 +4,8 @@ import com.wzg.ssh.base.BaseAction;
 import com.wzg.ssh.department.domain.Department;
 import com.wzg.ssh.post.domain.Post;
 import com.wzg.ssh.post.service.PostService;
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import java.util.List;
 
@@ -12,41 +14,46 @@ import java.util.List;
  */
 public class PostAction extends BaseAction<Post, PostService> {
 
-
+    // 所有职位集合
     private List<Post> posts;
-
+    // 所有部门的集合
     private List<Department> departments;
 
 
-
-    private int deptId;
-    private String deptName;
-
-
-
+    //查询出所有的职位
     public String getPost() {
         posts = service.getPost(getModel());
         return SUCCESS;
     }
 
+
+    //查出所有的部门
     public String getDept() {
         departments = service.getDept();
-        System.out.println(getModel().getPostId() + "------");
         return SUCCESS;
     }
 
 
-    public String savePost() {
-//            getModel().setDept(new Department(deptId, deptName));
-//            System.out.println(deptId);
-        System.out.println(getModel());
-        service.savePost(getModel());
+    //编辑或者保存
+    public String saveOrEditPost() {
+        // 对保存和编辑部门进行验证
+        if(getModel().getPostName().equals("")){
+            addActionError("请填写部门名字");
+            departments = service.getDept();
+            return INPUT;
+        }else if (getModel().getDept().getDeptId() < 0){
+            addActionError("请选择职务");
+            departments = service.getDept();
+            return INPUT;
+        }
+
+            service.saveOrEditPost(getModel());
             return SUCCESS;
+
+
+
+
     }
-
-
-
-
 
 
     public List<Post> getPosts() {
@@ -66,12 +73,4 @@ public class PostAction extends BaseAction<Post, PostService> {
     }
 
 
-
-    public int getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId(int deptId) {
-        this.deptId = deptId;
-    }
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -10,6 +11,7 @@
 </head>
 
 <body class="emp_body">
+
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
   <tr>
     <td class="topg"></td>
@@ -35,9 +37,11 @@
 </table>
 
 <%--保存部门--%>
-<form action="saveDept" method="post">
+<form action="${pageContext.request.contextPath}/saveOrUpdateDept.action" method="post">
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
+         <%--接收验证器的错误信息--%>
+         <s:fielderror cssStyle="color: red"/>
 	    <td>部门名称：</td>
 	    <td><input type="text" name="deptName" value="${deptName}"/></td>
 	    <td><input type="hidden" name="deptId" value="${deptId}"/></td>

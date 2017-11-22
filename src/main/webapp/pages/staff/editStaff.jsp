@@ -54,7 +54,7 @@
                 }
             });
 
-            xhr.open("POST", "http://localhost:8080/getPostByDeptId");
+            xhr.open("POST", "${pageContext.request.contextPath}/getPostByDeptId");
 
             xhr.send(data);
 
@@ -90,23 +90,31 @@
 </table>
 
 <%--保存功能--%>
-<form action="/saveOrUpdateStaff.action" method="post">
+<form action="${pageContext.request.contextPath}/saveOrUpdateStaff.action" method="post">
     <table width="88%" border="0" class="emp_table" style="width:80%;">
         <tr>
             <td>登录名：</td>
-            <td><input type="text" name="loginName" value="${loginName}"/></td>
+            <td><input type="text" name="loginName" value="${sessionScope.get("staffsss").loginName}"/></td>
             <td>密码：</td>
             <td><input type="password" name="loginPwd" value=""/></td>
         </tr>
         <tr>
             <td>姓名：</td>
 
-            <td><input type="text" name="staffName" value="${staffName}" id="staffAction_add_staffName"/></td>
+            <td><input type="text" name="staffName" value="${sessionScope.get("staffsss").staffName}" id="staffAction_add_staffName"/></td>
             <td>性别：</td>
 
-            <td><input type="radio" name="gender" value="男" <c:if test="${gender}=='男'">checked="checked"</c:if>/>男
+            <td>
+                <c:if test="${sessionScope.get('staffsss').gender=='男'}">
+                    <input type="radio" name="gender" value="男" checked="checked"/>男
+                    <input type="radio" name="gender" value="女" />女
+                </c:if>
+                <c:if test="${sessionScope.get('staffsss').gender=='女'}">
+                    <input type="radio" name="gender" value="男" />男
+                    <input type="radio" name="gender" value="女" checked="checked"/>女
+                </c:if>
 
-                <input type="radio" name="gender" value="女" <c:if test="${gender}=='女'">checked="checked"</c:if>/>女
+
             </td>
 
 
@@ -115,15 +123,15 @@
             <%--二级联动--%>
             <td width="10%">所属部门：</td>
             <td width="20%">
-                <select name="model.dept.deptId" onchange="onDeptSelect(value)">
+                <select id="deptId" name="model.dept.deptId" onchange="onDeptSelect(value)">
                     <option value="-1">----请--选--择----</option>
                     <s:iterator value="departments" var="d">
-                        <s:if test="#d.deptId==model.post.dept.deptId">
+                        <s:if test="%{#d.deptId==#session.staffsss.post.dept.deptId}">
                             <option value="${d.deptId}" selected="selected">${d.deptName}</option>
                         </s:if>
                         <s:else>
                             <option value="${d.deptId}">${d.deptName}</option>
-                        </s:else>
+                    </s:else>
                     </s:iterator>
                 </select>
 
@@ -131,20 +139,7 @@
             <td width="8%">职务：</td>
             <td width="62%">
                 <select id="postId" name="model.post.postId">
-
-                    <s:iterator value="postList" var="p">
-
-                        <s:if test="#post.postId==model.post.postId">
-                            <option value="${p.postId}" selected="selected">${p.postName}</option>
-                        </s:if>
-                        <s:else>
-
-                            <option value="${p.postId}">${p.postName}</option>
-                        </s:else>
-
-
-                    </s:iterator>
-
+                    <option value="${sessionScope.get("staffsss").post.postId}" selected="selected">${sessionScope.get("staffsss").post.postName}</option>
                 </select>
 
 
@@ -153,14 +148,15 @@
         <tr>
             <td width="10%">入职时间：</td>
             <td width="20%">
-                <input type="text" name="onDutyDate" value="${onDutyDate}" readonly="readonly"
+                <input type="text" name="onDutyDate" value="${sessionScope.get('staffsss').onDutyDate}" readonly="readonly"
                        onfocus="c.showMoreDay=true; c.show(this);"/>
             </td>
             <td width="8%"></td>
             <td width="62%"></td>
         </tr>
         <tr>
-            <td><input type="hidden" name="model.staffId" value="${model.staffId}"></td>
+            <td><input type="hidden" name="model.staffId" value="${sessionScope.get('staffsss').staffId}"></td>
+
         </tr>
     </table>
 </form>

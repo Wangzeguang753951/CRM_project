@@ -60,7 +60,9 @@ public class BaseAction<T,S> extends ActionSupport implements ModelDriven<T> {
 
         ActionContext.getContext().getSession().put(key, value);
 
-
+    }
+    public void sessionRemove(String key){
+        ActionContext.getContext().getSession().remove(key);
     }
 
 

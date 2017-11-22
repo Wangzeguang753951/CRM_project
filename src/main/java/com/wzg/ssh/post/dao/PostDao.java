@@ -11,22 +11,25 @@ import java.util.List;
 public interface PostDao {
 
     /**
-     * 查处所有职位
+     * 查出所有职位
      * @return
      */
     List<Post> getPost(Post post);
 
+
+
     /**
-     * 查询所有部门
+     *  点击职位管理 查询所有部门
      * @return
      */
     List<Department> getDept();
+
 
     /**
      * 保存职位
      * @param post
      */
-    void savePost(Post post);
+    void saveOrEditPost(Post post);
 
 
 

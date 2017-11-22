@@ -1,10 +1,12 @@
 package com.wzg.ssh.staff.service.impl;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.wzg.ssh.department.domain.Department;
 import com.wzg.ssh.post.domain.Post;
 import com.wzg.ssh.staff.dao.StaffDao;
 import com.wzg.ssh.staff.domain.Staff;
 import com.wzg.ssh.staff.service.StaffService;
+import com.wzg.ssh.utils.MD5Util;
 
 import java.util.List;
 
@@ -41,6 +43,12 @@ public class StaffServiceImpl implements StaffService {
         return staffDao.getDept();
     }
 
+    // 根据员工ID查询所有的员工
+    @Override
+    public List<Staff> getStaffsByStaffId(Staff staff) {
+        return staffDao.getStaffsByStaffId(staff);
+    }
+
 
     @Override
     public List<Staff> getAllResult(int deptId, int postId, String staffName) {
@@ -65,17 +73,24 @@ public class StaffServiceImpl implements StaffService {
             return staffDao.findStaffsByDeptIdAndPostIdAndStaffName(deptId, postId, staffName);
         }
 
+
         //5 部门不为空 职位为空 名字不为空
 
         if (deptId > 0 && postId < 0 && !staffName.equals("")) {
             return staffDao.findStaffsByDeptIdAndStaffName(deptId, postId, staffName);
         }
 
-        //6 部门为空 职位为空 名字不为空
 
+        //6 部门为空 职位为空 名字不为空
             return staffDao.findStaffsByStaffName(deptId, postId, staffName);
 
 
+    }
+
+    // 修改密码
+    @Override
+    public void updatePwd(Staff staff) {
+        staffDao.updatePwd(staff);
     }
 
     public void setStaffDao(StaffDao staffDao) {

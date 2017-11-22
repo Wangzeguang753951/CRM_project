@@ -37,15 +37,16 @@
     </tr>
 </table>
 
-<form action="/savePost" method="post">
+<form action="${pageContext.request.contextPath}/saveOrEditPost" method="post">
 
     <table width="88%" border="0" class="emp_table" style="width:80%;">
         <tr>
+            <%--接受验证传来的信息--%>
+            <s:actionerror cssStyle="color: red"/>
             <td>选择部门：</td>
             <td><select name="dept.deptId">
                 <option value="">----请--选--择----</option>
                 <s:iterator value="departments" var="d1">
-
                     <s:if test="#d1.deptId==staff.dept.deptId">
                         <option value="${d1.deptId}">${d1.deptName}</option>
                     </s:if>

@@ -12,28 +12,25 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
     private PostDao postDao;
 
-
+    // 查出所有的职位
     @Override
     public List<Post> getPost(Post post) {
         return postDao.getPost(post);
     }
-
+    // 查出所有的部门
     @Override
     public List<Department> getDept() {
         return postDao.getDept();
     }
 
+    // 编辑或者保存职位
     @Override
-    public void savePost(Post post) {
-        postDao.savePost(post);
+    public void saveOrEditPost(Post post) {
+        postDao.saveOrEditPost(post);
     }
 
 
 
-
-    public PostDao getPostDao() {
-        return postDao;
-    }
 
     public void setPostDao(PostDao postDao) {
         this.postDao = postDao;

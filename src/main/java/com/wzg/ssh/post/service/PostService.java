@@ -10,24 +10,30 @@ import java.util.List;
  */
 public interface PostService {
 
+
+
     /**
      * 查处所有职位
-     * @return
+     * @return 职位集合
      */
     List<Post> getPost(Post post);
 
+
+
     /**
-     * 在Post页面查处所有的部门
-     * @return
+     * 在Post页面查出所有的部门
+     * @return 职位集合
      */
     List<Department> getDept();
+
+
 
     /**
      * 根据部门ID保存职位
      * @param post
      * @return
      */
-    void savePost(Post post);
+    void saveOrEditPost(Post post);
 
 
 

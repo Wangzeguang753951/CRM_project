@@ -48,6 +48,8 @@ FONT-SIZE: 12px; COLOR: #4b4b4b; LINE-HEIGHT: 18px; TEXT-DECORATION: none
 					</font> 
 					<br/>
 					<br/>
+					${sessionScope.get("key")}
+					<s:actionerror cssStyle="color: red"/>
 					<s:fielderror cssStyle="color: red"/>
 					<br/>
 					用户名：<input type="text" name="loginName" class="msg" /><br/><br/>

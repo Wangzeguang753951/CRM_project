@@ -8,20 +8,19 @@ import com.wzg.ssh.staff.domain.Staff;
 /**
  * Created by dllo on 17/11/10.
  */
-public class LoginInterceptor extends MethodFilterInterceptor {
+public class StaffInterceptor extends  MethodFilterInterceptor{
 
     // 登录拦截
-
     @Override
     protected String doIntercept(ActionInvocation actionInvocation) throws Exception {
-        Staff login = (Staff) ActionContext.getContext().getSession().get("login");
 
+        String login = (String) ActionContext.getContext().getSession().get("login");
         if (login==null){
-
-            return "input";
-
+            ActionContext.getContext().getSession().put("key","您还没有登录哦!!!");
+            return "interceptor";
         }
         return actionInvocation.invoke();
+
 
 
     }

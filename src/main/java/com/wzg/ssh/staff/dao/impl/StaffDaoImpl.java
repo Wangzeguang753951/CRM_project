@@ -17,9 +17,11 @@ import java.util.List;
  */
 public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
 
+
     // 查查出数据库中的员工信息集合
     @Override
     public Staff login(Staff staff) {
+
         // 登录时把md5加上 才能登录
         String md5 = MD5Util.getMd5(staff.getLoginPwd());
         staff.setLoginPwd(md5);
@@ -60,6 +62,21 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
     }
 
 
+    // 根据员工ID查询所有的员工
+    @Override
+    public List<Staff> getStaffsByStaffId(Staff staff) {
+        String sql = "from Staff crm_staff where staffId=?";
+        return (List<Staff>) getHibernateTemplate().find(sql, staff.getStaffId());
+    }
+
+    // 修改密码
+    @Override
+    public void updatePwd(Staff staff) {
+        getHibernateTemplate().saveOrUpdate(staff);
+
+    }
+
+
     // 七个查询方法
     @Override
     public List<Staff> findAllStaffs(int deptId, int postId, String staffName) {
@@ -88,7 +105,7 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
     @Override
     public List<Staff> findStaffsByDeptIdAndStaffName(int deptId, int postId, String staffName) {
         String sql5 = "from Staff crm_staff where dept.deptId=? and staffName like ?";
-       return (List<Staff>) getHibernateTemplate().find(sql5, deptId, "%" + staffName + "%");
+        return (List<Staff>) getHibernateTemplate().find(sql5, deptId, "%" + staffName + "%");
     }
 
     @Override
@@ -96,8 +113,6 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
         String sql6 = "from Staff crm_staff where staffName like ?";
         return (List<Staff>) getHibernateTemplate().find(sql6, "%" + staffName + "%");
     }
-
-
 
 
 }

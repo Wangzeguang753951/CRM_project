@@ -28,9 +28,9 @@
                 d.add('0104', '01', '就业部');
                 d.add('010401', '0104', '就业情况', '${pageContext.request.contextPath}/pages/graduate/listGraduate.jsp', '', 'right');
                 d.add('0105', '01', '人力资源部');
-                d.add('010501', '0105', '部门管理', 'getDept', '', 'right');// 点击部门管理查出所有的部门放在列表中
-                d.add('010502', '0105', '职务管理', 'getPost', '', 'right');
-                d.add('010503', '0105', '员工管理', 'getStaff', '', 'right');//点击员工管理查出部门 查出职位 查出员工并且部门和职位生成二级联动
+                d.add('010501', '0105', '部门管理', '${pageContext.request.contextPath}/getDept', '', 'right');// 点击部门管理查出所有的部门放在列表中
+                d.add('010502', '0105', '职务管理', '${pageContext.request.contextPath}/getPost', '', 'right');// 点击职务管理 查出所有部门,根据部门ID查出所有的职务
+                d.add('010503', '0105', '员工管理', '${pageContext.request.contextPath}/getStaff', '', 'right');//点击员工管理查出部门 查出职位 查出员工并且部门和职位生成二级联动
 
                 document.write(d);
             </script>

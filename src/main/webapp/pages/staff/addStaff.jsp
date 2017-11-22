@@ -53,7 +53,7 @@
                 }
             });
 
-            xhr.open("POST", "http://localhost:8080/getPostByDeptId");
+            xhr.open("POST", "${pageContext.request.contextPath}/getPostByDeptId");
 
             xhr.send(data);
 
@@ -89,9 +89,10 @@
 </table>
 
 <%--保存功能--%>
-<form action="/saveOrUpdateStaff.action" method="post">
+<form action="${pageContext.request.contextPath}/saveOrUpdateStaff.action" method="post">
     <table width="88%" border="0" class="emp_table" style="width:80%;">
         <tr>
+            <s:actionerror cssStyle="color: red"/>
             <td>登录名：</td>
             <td><input type="text" name="loginName" value=""/></td>
             <td>密码：</td>
@@ -127,16 +128,12 @@
                 <select id="postId" name="model.post.postId">
                     <option value="-1">----请--选--择----</option>
                     <s:iterator value="postList" var="p">
-
                         <s:if test="#post.postId==model.post.postId">
                             <option value="${p.postId}" selected="selected">${p.postName}</option>
                         </s:if>
                         <s:else>
-
                             <option value="${p.postId}">${p.postName}</option>
                         </s:else>
-
-
                     </s:iterator>
 
                 </select>

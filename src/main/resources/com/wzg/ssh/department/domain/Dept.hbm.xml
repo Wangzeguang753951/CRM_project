@@ -3,26 +3,26 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="com.wzg.ssh.staff.domain">
 
-
+<hibernate-mapping package="com.wzg.ssh.department.domain">
     <!--创建部门信息表-->
-    <class name="com.wzg.ssh.department.domain.Department" table="crm_dept">
+    <class name="Department" table="crm_dept">
         <id name="deptId" column="dept_Id">
             <generator class="native"/>
         </id>
         <property name="deptName"/>
 
         <!--设置部门一对多-->
-        <set name="posts" table="crm_post" lazy="false">
+        <set name="posts" table="crm_post" cascade="save-update" inverse="true" lazy="false">
             <key column="dept_Id"/>
             <one-to-many class="com.wzg.ssh.post.domain.Post"/>
         </set>
+
         <!--设置一对多员工-->
 
-        <set name="staffs" table="crm_staff" lazy="false">
+        <set name="staffs" table="crm_staff" cascade="save-update" inverse="true" lazy="false">
             <key column="dept_Id"/>
-            <one-to-many class="Staff"/>
+            <one-to-many class="com.wzg.ssh.staff.domain.Staff"/>
         </set>
 
     </class>

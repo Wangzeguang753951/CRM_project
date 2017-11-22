@@ -10,6 +10,7 @@ import java.util.List;
  * Created by dllo on 17/11/9.
  */
 public interface StaffService {
+
     /**
      * 员工登录
      *
@@ -45,11 +46,29 @@ public interface StaffService {
      */
     List<Department> getDept();
 
+    /**
+     * 根据员工ID查出所有的员工
+     * @param
+     * @return
+     */
+    List<Staff> getStaffsByStaffId(Staff staff);
 
 
+    /**
+     * 高级查询
+     * @param deptId
+     * @param postId
+     * @param staffName
+     * @return
+     */
     // 高级查询
     List<Staff> getAllResult(int deptId, int postId, String staffName);
 
+    /**
+     * 修改密码
+     * @param staff
+     */
+    void updatePwd(Staff staff);
 
 
 }

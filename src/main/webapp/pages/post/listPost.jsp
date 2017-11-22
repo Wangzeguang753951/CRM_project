@@ -25,7 +25,8 @@
    
     <td width="57%"align="right">
     	<%--添加职务 --%>
-       <a href="/getDeptList.action">
+        <%--点击添加职务后显示所有部门--%>
+       <a href="${pageContext.request.contextPath}/getDeptList.action">
        	<img src="${pageContext.request.contextPath}/images/button/tianjia.gif" />
        </a>
       
@@ -46,13 +47,14 @@
     <td width="6%" align="center">职务名称</td>
     <td width="7%" align="center">编辑</td>
   </tr>
+    <%--查出来的所有职位进行遍历--%>
   <s:iterator value="posts" var="p">
-
   	<tr class="tabtd1">
 	    <td align="center">${p.dept.deptName} </td>
 	    <td align="center">${p.postName} </td>
 	  	<td width="7%" align="center">
-	  		<a href="getDeptList?dept.deptId=${p.dept.deptId}&postId=${p.postId}&postName=${p.postName}"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
+            <%--点击编辑部门设置部门和职位的回显--%>
+	  		<a href="${pageContext.request.contextPath}/getDeptList.action?dept.deptId=${p.dept.deptId}&postId=${p.postId}&postName=${p.postName}"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
 	  	</td>
 	  </tr>
   </s:iterator>

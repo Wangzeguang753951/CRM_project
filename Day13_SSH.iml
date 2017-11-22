@@ -10,8 +10,8 @@
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
         <sourceRoots>
-          <root url="file://$MODULE_DIR$/src/main/java" />
           <root url="file://$MODULE_DIR$/src/main/resources" />
+          <root url="file://$MODULE_DIR$/src/main/java" />
           <root url="file://$MODULE_DIR$/target/generated-sources/archetype" />
         </sourceRoots>
       </configuration>
@@ -22,9 +22,9 @@
             <file>jar://$MAVEN_REPOSITORY$/org/apache/struts/struts2-spring-plugin/2.5.13/struts2-spring-plugin-2.5.13.jar!/struts-plugin.xml</file>
             <file>jar://$MAVEN_REPOSITORY$/org/apache/struts/struts2-core/2.5.13/struts2-core-2.5.13.jar!/struts-default.xml</file>
             <file>file://$MODULE_DIR$/src/main/resources/struts.xml</file>
-            <file>file://$MODULE_DIR$/src/main/resources/com/wzg/ssh/department/struts/dept-struts.xml</file>
-            <file>file://$MODULE_DIR$/src/main/resources/com/wzg/ssh/staff/struts/staff-struts.xml</file>
-            <file>file://$MODULE_DIR$/src/main/resources/com/wzg/ssh/post/struts/post-struts.xml</file>
+            <file>file://$MODULE_DIR$/src/main/resources/struts/dept-struts.xml</file>
+            <file>file://$MODULE_DIR$/src/main/resources/struts/post-struts.xml</file>
+            <file>file://$MODULE_DIR$/src/main/resources/struts/staff-struts.xml</file>
           </fileset>
           <propertiesKeys disabled="false" />
         </configuration>
@@ -36,6 +36,7 @@
           <file>file://$MODULE_DIR$/src/main/resources/com/wzg/ssh/department/spring/dept-spring.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/com/wzg/ssh/post/spring/post-spring.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/com/wzg/ssh/staff/spring/staff-spring.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring-config.xml</file>
         </fileset>
       </configuration>
     </facet>
@@ -109,6 +110,6 @@
     <orderEntry type="library" name="Maven: org.apache.ant:ant:1.9.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ant:ant-launcher:1.9.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:4.3.12.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: javax.servlet.jsp.jstl:jstl:1.2" level="project" />
+    <orderEntry type="library" name="Maven: jstl:jstl:1.2" level="project" />
   </component>
 </module>
