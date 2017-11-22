@@ -36,7 +36,7 @@
 
                     for (var j = 0; j < json.length; j++) {
                         var tr = document.createElement("tr");
-                        getId = json[j].staffId;
+                        getId = json[j];
 
                         tr.appendChild(createTD(json[j].staffName));
                         tr.appendChild(createTD(json[j].gender));
@@ -44,10 +44,13 @@
                         tr.appendChild(createTD(json[j].dept.deptName));
                         tr.appendChild(createTD(json[j].post.postName));
 
+
                         function createA() {
+
                             var get_Id = json[j].staffId;
-                            var path = "${pageContext.request.contextPath}/editStaff?staffId=";
-                            path += get_Id;
+
+                            var path = "${pageContext.request.contextPath}/editStaffs?staffId=" + get_Id + "&amp;post.dept.deptId";
+
 
                             var td = document.createElement("td");
                             td.setAttribute("align", "center");
@@ -134,10 +137,7 @@
             xhr.open("POST", "${pageContext.request.contextPath}/getPostByDeptId");
 
             xhr.send(data);
-
         }
-
-
     </script>
 
 
@@ -162,7 +162,8 @@
             <%--员工添加 --%>
 
             <%--点击添加后要查出部门和职位 生成二级联动--%>
-            <a href="getAllDept">
+
+            <a href="${pageContext.request.contextPath}/getAllDept.action">
                 <img src="${pageContext.request.contextPath}/images/button/tianjia.gif"/>
             </a>
 
@@ -175,7 +176,7 @@
 </table>
 
 <!-- 查询条件：马上查询 -->
-<form id="conditionFormId" action="/staff/staffAction_findAll" method="post">
+<form id="conditionFormId" action="${pageContext.request.contextPath}/staff/staffAction_findAll" method="post">
     <table width="88%" border="0" style="margin: 20px;">
         <tr>
             <td width="80px">部门：</td>
@@ -229,16 +230,19 @@
             <td align="center">${list.onDutyDate}</td>
             <td align="center">${list.dept.deptName}</td>
             <td align="center">${list.post.postName}</td>
+
+
             <td width="7%" align="center">
 
                     <%--点击编辑把StaffID和deptID和postID传到Action中 最后跳转还是addStaff界面--%>
-                <a href="${pageContext.request.contextPath}/editStaff?staffId=${list.staffId}&model.post.dept.deptId=${list.dept.deptId}&model.post.postId=${list.post.postId}&model.post.postName=${list.post.postName}&loginName=${list.loginName}&loginPwd=${list.loginPwd}&staffName=${list.staffName}&onDutyDate=${list.onDutyDate}&gender=${list.gender}"><img
+                <a href="${pageContext.request.contextPath}/editStaffs.action?staffId=${list.staffId}"><img
                         src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
             </td>
         </tr>
     </s:iterator>
 
 </table>
+<s:actionerror cssStyle="color: green"/>
 
 
 <%--<table border="0" cellspacing="0" cellpadding="0" align="center">--%>
